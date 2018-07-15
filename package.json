@@ -8,7 +8,8 @@
     "stage": "react-static build --staging",
     "build": "react-static build",
     "serve": "serve dist -p 3000",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "styleguide": "styleguidist server"
   },
   "dependencies": {
     "axios": "^0.16.2",
