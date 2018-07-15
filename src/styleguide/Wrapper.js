@@ -1,4 +1,8 @@
 import React from 'react'
 import 'normalize.css'
+import { ThemeProvider } from '../components/ThemeProvider'
 
-export default ({ children, ...props }) => React.cloneElement(children, props)
+// eslint-disable-next-line react/prop-types
+export default ({ children, ...props }) => (
+  <ThemeProvider>{React.cloneElement(children, props)}</ThemeProvider>
+)
