@@ -2,6 +2,7 @@ import React from 'react'
 import { Router, Link } from 'react-static'
 import styled, { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
+import 'normalize.css'
 //
 import Routes from 'react-static-routes'
 
