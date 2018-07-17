@@ -36,6 +36,9 @@ jobs:
           command: yarn styleguide:build
 
       - run:
-          name: deploy styleguide to surge
-          command: yarn surge styleguide kelvin-pay.surge.sh
-    
+          name: deploy styleguide
+          command: |
+            git config --global user.email "ci@codekelvin.com"
+            git config --global user.name "CircleCI"
+            echo pay-styleguide.codekelvin.com > styleguide/CNAME
+            yarn styleguide:deploy

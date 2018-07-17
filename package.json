@@ -10,7 +10,8 @@
     "serve": "serve dist -p 3000",
     "precommit": "lint-staged",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "styleguide:deploy": "gh-pages -d styleguide"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -34,12 +35,12 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
+    "gh-pages": "^1.2.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7",
     "react-styleguidist": "^7.1.0",
-    "serve": "^6.1.0",
-    "surge": "^0.20.1"
+    "serve": "^6.1.0"
   },
   "lint-staged": {
     "*.{js,jsx,json,css}": [
