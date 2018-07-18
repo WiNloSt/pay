@@ -11,13 +11,25 @@ import pattern from './assets/black-opaque.png'
 
 injectGlobal`
   body {
-    background-color: #def;
-    background-image: url(${pattern})
+    position: relative;
+    min-height: 100vh;
+
+    &::after {
+      content: '';
+      position: absolute;
+      opacity: 0.5;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-image: url(${pattern});
+      z-index: -1;
+    }
   }
 `
 
 const Nav = styled.nav`
-  background: white;
+  background: #d4efff;
   box-shadow: 0 0 0.25rem #aaa;
   display: flex;
   justify-content: flex-end;
