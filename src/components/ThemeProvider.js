@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { ThemeProvider as Provider } from 'styled-components'
+import { darken } from '../../node_modules/polished'
 
 const main = '#0af'
 const accent = '#fa3'
@@ -35,6 +36,14 @@ const GlobalStyle = styled.div`
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
     'Lucida Grande', sans-serif;
   color: #333;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+
+  a {
+    color: ${darken(0.1, main)};
+    cursor: pointer;
+  }
 `
 
 export const ThemeProvider = props => (

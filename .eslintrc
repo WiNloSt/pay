@@ -3,6 +3,7 @@
   "extends": ["standard", "standard-react"],
   "rules": {
     "jsx-quotes": "off",
-    "indent": "off"
+    "indent": "off",
+    "space-before-function-paren": "off"
   }
 }
