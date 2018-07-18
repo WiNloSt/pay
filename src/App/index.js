@@ -12,6 +12,7 @@ import Login from '../pages/Login'
 import Tos from '../pages/Tos'
 import Privacy from '../pages/Privacy'
 import { Nav } from '../components/Nav'
+import { StoreProvider } from '../components/Store'
 
 injectGlobal`
   body {
@@ -34,23 +35,25 @@ injectGlobal`
 
 const App = () => (
   <Router>
-    <ThemeProvider>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/tos" component={Tos} />
-        <Route exact path="/privacy" component={Privacy} />
-        <Route
-          render={() => (
-            <React.Fragment>
-              <Nav />
-              <div>
-                <Routes />
-              </div>
-            </React.Fragment>
-          )}
-        />
-      </Switch>
-    </ThemeProvider>
+    <StoreProvider>
+      <ThemeProvider>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/tos" component={Tos} />
+          <Route exact path="/privacy" component={Privacy} />
+          <Route
+            render={() => (
+              <React.Fragment>
+                <Nav />
+                <div>
+                  <Routes />
+                </div>
+              </React.Fragment>
+            )}
+          />
+        </Switch>
+      </ThemeProvider>
+    </StoreProvider>
   </Router>
 )
 

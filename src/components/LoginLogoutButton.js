@@ -1,28 +1,39 @@
 import React from 'react'
 import { Link as UnstyledLink } from 'react-static'
 import styled from 'styled-components'
-import { Toggle } from 'react-powerplug'
+import { StoreConsumer } from './Store'
 
 const Link = styled(UnstyledLink)`
   user-select: none;
 `
 
+const UserProfileImage = styled.div`
+  background-image: url(${props => props.url});
+  width: 2rem;
+  height: 2rem;
+  background-size: contain;
+  border-radius: 50%;
+`
+
 export class LoginLogoutButton extends React.Component {
   render() {
     return (
-      <Toggle>
-        {({ on: loggedIn, toggle }) =>
-          loggedIn ? (
-            <Link className="b f4" onClick={toggle}>
-              Logout
-            </Link>
+      <StoreConsumer>
+        {({ authUser, signOut }) =>
+          authUser ? (
+            <React.Fragment>
+              <UserProfileImage url={authUser.photoURL} />
+              <Link to="#" className="b f4 ml2">
+                <span onClick={signOut}>Logout</span>
+              </Link>
+            </React.Fragment>
           ) : (
             <Link className="b f4" to="/login">
-              Login
+              <span>Login</span>
             </Link>
           )
         }
-      </Toggle>
+      </StoreConsumer>
     )
   }
 }
