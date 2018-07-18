@@ -13,6 +13,14 @@ export default {
         component: 'src/pages/Login'
       },
       {
+        path: '/tos',
+        component: 'src/pages/Tos'
+      },
+      {
+        path: '/privacy',
+        component: 'src/pages/Privacy'
+      },
+      {
         is404: true,
         component: 'src/pages/404'
       }

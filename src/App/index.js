@@ -1,14 +1,17 @@
 import React from 'react'
 import { Router, Switch, Route } from 'react-static'
-import styled, { injectGlobal } from 'styled-components'
+import { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 // import 'normalize.css'
 //
 import Routes from 'react-static-routes'
+import '../firebaseSetup'
 import { ThemeProvider } from '../components/ThemeProvider'
-import { LoginLogoutButton } from '../components/LoginLogoutButton'
 import pattern from './assets/black-opaque.png'
 import Login from '../pages/Login'
+import Tos from '../pages/Tos'
+import Privacy from '../pages/Privacy'
+import { Nav } from '../components/Nav'
 
 injectGlobal`
   body {
@@ -29,25 +32,17 @@ injectGlobal`
   }
 `
 
-const Nav = styled.nav`
-  background: #d4efff;
-  box-shadow: 0 0 0.25rem #aaa;
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
-`
-
 const App = () => (
   <Router>
     <ThemeProvider>
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route exact path="/tos" component={Tos} />
+        <Route exact path="/privacy" component={Privacy} />
         <Route
           render={() => (
             <React.Fragment>
-              <Nav>
-                <LoginLogoutButton />
-              </Nav>
+              <Nav />
               <div>
                 <Routes />
               </div>
