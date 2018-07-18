@@ -5,14 +5,21 @@ const main = '#0af'
 const accent = '#fa3'
 
 const defaultTheme = {
-  color: {
-    main: 'white',
-    mainSec: main
+  main: {
+    color: 'white',
+    bg: main
   },
-  bgColor: {
-    main: main,
-    mainSec: 'white',
-    accent: accent
+  secondary: {
+    color: main,
+    bg: 'white'
+  },
+  disabled: {
+    color: 'white',
+    bg: '#aaa'
+  },
+  accent: {
+    color: 'white',
+    bg: accent
   },
   space: {
     s: '0.25rem',

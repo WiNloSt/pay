@@ -3,11 +3,19 @@ import { darken, lighten } from 'polished'
 export const Button = styled.button`
   box-sizing: border-box;
   transition: all 0.15s;
-  background: ${props =>
-    props.secondary ? props.theme.bgColor.mainSec : props.theme.bgColor.main};
-  color: ${props =>
-    props.secondary ? darken(0.1, props.theme.color.mainSec) : props.theme.color.main};
-  border: ${props => (props.secondary ? `1px solid ${props.theme.color.mainSec}` : 0)};
+  background: ${props => {
+    if (props.secondary) return props.theme.secondary.bg
+    if (props.disabled) return props.theme.disabled.bg
+
+    return props.theme.main.bg
+  }};
+  color: ${props => {
+    if (props.secondary) return darken(0.1, props.theme.secondary.color)
+    if (props.disabled) return props.theme.disabled.color
+
+    return props.theme.main.color
+  }};
+  border: ${props => (props.secondary ? `1px solid ${props.theme.secondary.color}` : 0)};
   padding: ${({ theme: { space } }) => `${space.m} ${space.l}`};
   border-radius: ${props => props.theme.borderRadius};
   user-select: none;
@@ -17,16 +25,20 @@ export const Button = styled.button`
   }
 
   &:hover {
-    color: ${props => props.secondary && props.theme.color.main};
-    background: ${props => darken(0.05, props.theme.bgColor.main)};
+    ${props =>
+      !props.disabled &&
+      `
+      color: ${props.secondary && props.theme.main.color};
+      background: ${darken(0.05, props.theme.main.bg)};
+    `};
   }
 
   &:active {
-    background: ${props => darken(0.07, props.theme.bgColor.main)};
+    background: ${props => darken(0.07, props.theme.main.bg)};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px ${props => lighten(0.2, props.theme.bgColor.main)};
+    box-shadow: 0 0 0 3px ${props => lighten(0.2, props.theme.main.bg)};
   }
 `
