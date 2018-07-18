@@ -1,8 +1,17 @@
 import React from 'react'
-//
+import { Redirect } from 'react-static'
 
-export default () => (
-  <div>
-    <h1>404 - Oh no's! We couldn't find that page :(</h1>
-  </div>
-)
+export default class extends React.Component {
+  state = {
+    render: false
+  }
+  componentDidMount() {
+    this.setState({
+      render: true
+    })
+  }
+
+  render() {
+    return this.state.render && <Redirect to="/" />
+  }
+}
