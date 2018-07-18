@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from 'react-static'
+import { Router, Switch, Route } from 'react-static'
 import styled, { injectGlobal } from 'styled-components'
 import { hot } from 'react-hot-loader'
 // import 'normalize.css'
@@ -8,6 +8,7 @@ import Routes from 'react-static-routes'
 import { ThemeProvider } from '../components/ThemeProvider'
 import { LoginLogoutButton } from '../components/LoginLogoutButton'
 import pattern from './assets/black-opaque.png'
+import Login from '../pages/Login'
 
 injectGlobal`
   body {
@@ -39,14 +40,21 @@ const Nav = styled.nav`
 const App = () => (
   <Router>
     <ThemeProvider>
-      <React.Fragment>
-        <Nav>
-          <LoginLogoutButton />
-        </Nav>
-        <div>
-          <Routes />
-        </div>
-      </React.Fragment>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route
+          render={() => (
+            <React.Fragment>
+              <Nav>
+                <LoginLogoutButton />
+              </Nav>
+              <div>
+                <Routes />
+              </div>
+            </React.Fragment>
+          )}
+        />
+      </Switch>
     </ThemeProvider>
   </Router>
 )

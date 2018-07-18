@@ -9,6 +9,10 @@ export default {
         component: 'src/pages/Home'
       },
       {
+        path: '/login',
+        component: 'src/pages/Login'
+      },
+      {
         is404: true,
         component: 'src/pages/404'
       }
