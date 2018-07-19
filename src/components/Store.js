@@ -18,7 +18,7 @@ export class StoreProvider extends React.Component {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user) {
-          console.log('user is signed int')
+          console.log('user is signed in')
           this.setState({
             authUser: user
           })
