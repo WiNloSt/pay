@@ -16,13 +16,21 @@ export const Button = styled.button`
     return props.theme.main.color
   }};
   border: ${props => (props.secondary ? `1px solid ${props.theme.secondary.color}` : 0)};
-  padding: ${({ theme: { space } }) => `${space.m} ${space.l}`};
+  padding: ${({ theme: { space } }) => `${space.m}em ${space.l}em`};
   border-radius: ${props => props.theme.borderRadius};
   user-select: none;
   outline: none;
   &::-moz-focus-inner {
     border: 0;
   }
+
+  ${props => !props.disabled && 'cursor: pointer'};
+
+  ${props =>
+    props.large &&
+    `
+    font-size: 1.5rem;
+  `};
 
   &:hover {
     ${props =>
