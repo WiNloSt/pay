@@ -36,7 +36,6 @@ export class StoreProvider extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <context.Provider
         value={{
