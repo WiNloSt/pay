@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { Button } from '../components/Button'
 import { StoreConsumer } from '../components/Store'
+import { Card } from '../components/Card'
 
 const Container = styled.div`
   display: flex;
@@ -29,20 +30,22 @@ const EqualWidthContainer = styled.div`
 export default () => (
   <StoreConsumer>
     {({ authUser }) => (
-      <Container>
-        <EqualWidthContainer>
-          <Link to="/pay">
-            <Button large className="w-100">
-              Pay
-            </Button>
-          </Link>
-          {!authUser.loading && (
-            <Button disabled large>
-              History
-            </Button>
-          )}
-        </EqualWidthContainer>
-      </Container>
+      <Card style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+        <Container>
+          <EqualWidthContainer>
+            <Link to="/pay">
+              <Button large className="w-100">
+                Pay
+              </Button>
+            </Link>
+            {!authUser.loading && (
+              <Button disabled large>
+                History
+              </Button>
+            )}
+          </EqualWidthContainer>
+        </Container>
+      </Card>
     )}
   </StoreConsumer>
 )

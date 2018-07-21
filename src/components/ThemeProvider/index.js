@@ -39,11 +39,11 @@ injectGlobal`
     position: relative;
     min-height: 100%;
     height: auto !important; /* override and design's default */
+    background-color: #f0f2f5 !important; /* override and design's default */
 
     &::after {
       content: '';
       position: absolute;
-      opacity: 0.5;
       top: 0;
       left: 0;
       bottom: 0;
