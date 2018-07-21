@@ -15,6 +15,19 @@ import { StoreProvider } from './components/Store'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+`
+
+const FullPage = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1;
+    width: 100%;
+  }
 `
 
 const App = () => (
@@ -29,9 +42,9 @@ const App = () => (
             render={() => (
               <Container>
                 <Nav />
-                <div className="mt4 mh3">
+                <FullPage className="mt4 mh3">
                   <Routes />
-                </div>
+                </FullPage>
               </Container>
             )}
           />
