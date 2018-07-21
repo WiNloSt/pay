@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { LoginLogoutButton } from './LoginLogoutButton'
 
 const Container = styled.nav`
+  flex: none;
   background: #d4efff;
   box-shadow: 0 0 0.25rem #aaa;
   display: flex;

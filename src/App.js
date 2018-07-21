@@ -15,12 +15,8 @@ import { StoreProvider } from './components/Store'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
 `
 
-const FullPage = styled.div`
-  flex: 1;
-`
 const App = () => (
   <Router>
     <StoreProvider>
@@ -33,9 +29,9 @@ const App = () => (
             render={() => (
               <Container>
                 <Nav />
-                <FullPage>
+                <div>
                   <Routes />
-                </FullPage>
+                </div>
               </Container>
             )}
           />

@@ -37,7 +37,8 @@ const defaultTheme = {
 injectGlobal`
   body {
     position: relative;
-    height: 100vh;
+    min-height: 100%;
+    height: auto !important; /* override and design's default */
     font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
     'Lucida Grande', sans-serif;
     color: #333;
@@ -56,10 +57,6 @@ injectGlobal`
       background-image: url(${pattern});
       z-index: -1;
     }
-  }
-
-  #root {
-    height: 100%;
   }
 
   a {
