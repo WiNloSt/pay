@@ -42,7 +42,7 @@ const App = () => (
             render={() => (
               <Container>
                 <Nav />
-                <FullPage className="mt4 mh3">
+                <FullPage className="mv4 mh3">
                   <Routes />
                 </FullPage>
               </Container>
