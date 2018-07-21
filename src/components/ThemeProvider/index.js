@@ -39,12 +39,6 @@ injectGlobal`
     position: relative;
     min-height: 100%;
     height: auto !important; /* override and design's default */
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
-    'Lucida Grande', sans-serif;
-    color: #333;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
 
     &::after {
       content: '';
