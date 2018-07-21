@@ -19,17 +19,6 @@ const Container = styled.div`
   height: 100%;
 `
 
-const FullPage = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    flex: 1;
-    width: 100%;
-  }
-`
-
 const App = () => (
   <Router>
     <StoreProvider>

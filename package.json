@@ -23,6 +23,7 @@
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
     "polished": "^1.9.3",
+    "ramda": "^0.25.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-powerplug": "^1.0.0-rc.1",

@@ -5,6 +5,7 @@
     "jsx-quotes": "off",
     "indent": "off",
     "space-before-function-paren": "off",
-    "react/jsx-indent": "off"
+    "react/jsx-indent": "off",
+    "standard/no-callback-literal": "off"
   }
 }

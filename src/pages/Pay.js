@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Switch, Icon, Button } from 'antd'
+import { Form, Input, Switch, Icon, Button, InputNumber } from 'antd'
 import * as moment from 'moment'
 import { StoreConsumer } from '../components/Store'
 import { Link } from 'react-static'
+import * as R from 'ramda'
+
 import { Card } from '../components/Card'
 
 const formItemLayout = {
@@ -32,6 +34,19 @@ const Component = ({ form }) => (
         )
       }
 
+      const hasValue = value => !R.isNil(value) && !R.isEmpty(value)
+
+      const allFormFieldsFilled =
+        R.compose(
+          R.all(hasValue),
+          values => Object.keys(values).map(key => values[key])
+        )(form.getFieldsValue()) && R.complement(R.isEmpty)(form.getFieldsValue())
+
+      const formHasAnyError = R.compose(
+        R.any(hasValue),
+        values => Object.keys(values).map(key => values[key])
+      )(form.getFieldsError())
+
       return (
         <div>
           <Card>
@@ -59,8 +74,17 @@ const Component = ({ form }) => (
               </Form.Item>
               <Form.Item label="Amount" {...formItemLayout}>
                 {form.getFieldDecorator('amount', {
-                  rules: [{ required: true, message: 'Please input your amount!' }]
-                })(<Input />)}
+                  rules: [
+                    { type: 'number', message: 'Please input only numbers!' },
+                    { required: true, message: 'Please input your amount!' }
+                  ]
+                })(
+                  <InputNumber
+                    formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                  />
+                )}
+                <span className="ml2">฿</span>
               </Form.Item>
               <Form.Item label="Subscribe" {...formItemLayout}>
                 {form.getFieldDecorator('subscribe', {
@@ -79,7 +103,12 @@ const Component = ({ form }) => (
               </Form.Item>
               {form.getFieldDecorator('uid', { initialValue: '' })(<input type="hidden" />)}
               <Form.Item className="tc mb0">
-                <Button type="primary" htmlType="submit" size="large">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  disabled={!allFormFieldsFilled || formHasAnyError}
+                >
                   Submit
                 </Button>
                 <Link to="/">
