@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Switch, Icon } from 'antd'
+import { Form, Input, Switch, Icon, Button } from 'antd'
 import * as moment from 'moment'
 import styled from 'styled-components'
 import { StoreConsumer } from '../components/Store'
+import { Link } from 'react-static'
 
 const formItemLayout = {
   labelCol: {
@@ -31,7 +32,8 @@ const Component = ({ form }) => (
       if (shouldSetCustomerName) {
         setTimeout(() =>
           form.setFieldsValue({
-            customer: authUser.displayName
+            customer: authUser.displayName,
+            uid: authUser.uid
           })
         )
       }
@@ -39,20 +41,36 @@ const Component = ({ form }) => (
       return (
         <Container>
           <h1 className="mb3">Pay</h1>
-          <Form>
+          <Form
+            onSubmit={e => {
+              e.preventDefault()
+              form.validateFields((err, values) => {
+                if (!err) {
+                  console.log('Received values of form: ', values)
+                }
+              })
+            }}
+          >
             <Form.Item label="Item" {...formItemLayout}>
-              <Input />
+              {form.getFieldDecorator('item', {
+                rules: [{ required: true, message: 'Please input your item!' }]
+              })(<Input />)}
             </Form.Item>
             <Form.Item label="Customer Name" {...formItemLayout}>
-              {form.getFieldDecorator('customer', { initialValue: authUser.displayName })(
-                <Input disabled={!!authUser.displayName} />
-              )}
+              {form.getFieldDecorator('customer', {
+                initialValue: authUser.displayName,
+                rules: [{ required: true, message: 'Please input your name!' }]
+              })(<Input disabled={!!authUser.displayName} />)}
             </Form.Item>
             <Form.Item label="Amount" {...formItemLayout}>
-              <Input />
+              {form.getFieldDecorator('amount', {
+                rules: [{ required: true, message: 'Please input your amount!' }]
+              })(<Input />)}
             </Form.Item>
             <Form.Item label="Subscribe" {...formItemLayout}>
-              {form.getFieldDecorator('subscribe', { initialValue: false })(
+              {form.getFieldDecorator('subscribe', {
+                initialValue: false
+              })(
                 <Switch
                   checkedChildren={<Icon type="check" />}
                   unCheckedChildren={<Icon type="cross" />}
@@ -63,6 +81,17 @@ const Component = ({ form }) => (
                   bill on the {moment.default().format('Do')} of each month
                 </span>
               )}
+            </Form.Item>
+            {form.getFieldDecorator('uid', { initialValue: '' })(<input type="hidden" />)}
+            <Form.Item className="tc">
+              <Button type="primary" htmlType="submit" size="large">
+                Submit
+              </Button>
+              <Link to="/">
+                <Button size="large" className="ml3">
+                  Cancel
+                </Button>
+              </Link>
             </Form.Item>
           </Form>
         </Container>
