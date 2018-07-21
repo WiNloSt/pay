@@ -36,7 +36,7 @@ export default () => (
               Pay
             </Button>
           </Link>
-          {authUser && (
+          {!authUser.loading && (
             <Button disabled large>
               History
             </Button>

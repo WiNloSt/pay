@@ -11,7 +11,9 @@ export class StoreProvider extends React.Component {
   }
 
   state = {
-    authUser: null
+    authUser: {
+      loading: true
+    }
   }
 
   componentDidMount() {

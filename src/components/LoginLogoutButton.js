@@ -20,7 +20,7 @@ export class LoginLogoutButton extends React.Component {
     return (
       <StoreConsumer>
         {({ authUser, signOut }) =>
-          authUser ? (
+          !authUser.loading ? (
             <React.Fragment>
               <UserProfileImage url={authUser.photoURL} />
               <Link to="#" className="b f4 ml2">
