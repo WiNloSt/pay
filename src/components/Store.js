@@ -27,7 +27,9 @@ export class StoreProvider extends React.Component {
         } else {
           console.log('user is signed out')
           this.setState({
-            authUser: null
+            authUser: {
+              loading: true
+            }
           })
         }
       },
