@@ -13,6 +13,10 @@ export default {
         component: 'src/pages/Login'
       },
       {
+        path: '/pay',
+        component: 'src/pages/Pay'
+      },
+      {
         path: '/tos',
         component: 'src/pages/Tos'
       },

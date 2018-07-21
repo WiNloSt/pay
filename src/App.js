@@ -29,7 +29,7 @@ const App = () => (
             render={() => (
               <Container>
                 <Nav />
-                <div>
+                <div className="mt4 mh3">
                   <Routes />
                 </div>
               </Container>
