@@ -5,11 +5,13 @@ import * as moment from 'moment'
 import { Link } from 'react-static'
 import * as R from 'ramda'
 import { adopt } from 'react-adopt'
+import { State } from 'react-powerplug'
+import { Elements } from 'react-stripe-elements'
 
 import { StoreConsumer } from '../components/Store'
 import { Card } from '../components/Card'
-import { State } from 'react-powerplug'
 import { PageSelector } from '../components/PageSelector'
+import { CreditCardForm } from '../components/CreditCardForm'
 
 const formItemLayout = {
   labelCol: {
@@ -208,6 +210,7 @@ const Page2 = ({ state, form, className, showing }) => {
             </Col>
           </Row>
         )}
+        <CreditCardForm className="mt4" />
         <Row className="mt4">
           <Col offset={8} span={16}>
             <Button size="large" type="primary">
