@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { withRouter } from 'react-static'
 
 const context = React.createContext({})
 
-export class StoreProvider extends React.Component {
+class Provider extends React.Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    history: PropTypes.object
   }
 
   state = {
@@ -20,12 +22,10 @@ export class StoreProvider extends React.Component {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user) {
-          console.log('user is signed in')
           this.setState({
             authUser: user
           })
         } else {
-          console.log('user is signed out')
           this.setState({
             authUser: {
               loading: true
@@ -46,6 +46,7 @@ export class StoreProvider extends React.Component {
           ...this.state,
           signOut: () => {
             firebase.auth().signOut()
+            this.props.history.replace('/')
           }
         }}
       >
@@ -54,5 +55,7 @@ export class StoreProvider extends React.Component {
     )
   }
 }
+
+export const StoreProvider = withRouter(Provider)
 
 export const StoreConsumer = context.Consumer
