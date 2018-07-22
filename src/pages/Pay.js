@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, Switch, Icon, Button, InputNumber } from 'antd'
+import { Form, Input, Switch, Icon, Button, InputNumber, Row, Col } from 'antd'
 import * as moment from 'moment'
 import { Link } from 'react-static'
 import * as R from 'ramda'
@@ -22,6 +22,19 @@ const formItemLayout = {
   }
 }
 
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0
+    },
+    sm: {
+      span: 16,
+      offset: 8
+    }
+  }
+}
+
 const Composed = adopt({
   context: <StoreConsumer />,
   state: <State initial={{ page: 0 }} />
@@ -35,7 +48,7 @@ const Component = ({ form }) => (
           <Card>
             <PageSelector page={state.state.page}>
               <Page1 context={context} form={form} state={state} />
-              <Page2 state={state} />
+              <Page2 state={state} form={form} />
             </PageSelector>
           </Card>
         </div>
@@ -128,11 +141,13 @@ const Page1 = ({ context, form, state, className }) => {
             />
           )}
           {form.getFieldsValue(['subscribe']).subscribe && (
-            <span className="pl2">bill on the {moment.default().format('Do')} of each month</span>
+            <span className="pl2">
+              bill on the <strong>{moment.default().format('Do')}</strong> of each month
+            </span>
           )}
         </Form.Item>
         {form.getFieldDecorator('uid', { initialValue: '' })(<input type="hidden" />)}
-        <Form.Item className="tc mb0">
+        <Form.Item className="mb0" {...tailFormItemLayout}>
           <Button
             type="primary"
             htmlType="submit"
@@ -159,14 +174,57 @@ Page1.propTypes = {
   className: PropTypes.string
 }
 
-const Page2 = ({ state, className }) => (
-  <div className={className + ' mb3'}>
-    <h1>Checkout</h1>
-    <Button onClick={() => state.setState({ page: 0 })}>Go back</Button>
-  </div>
-)
+const fields = [
+  { label: 'Item', key: 'item' },
+  { label: 'Customer Name', key: 'customer' },
+  { label: 'Amount', key: 'amount', formatter: value => `${value} ฿` }
+]
+
+const Page2 = ({ state, form, className, showing }) => {
+  const formValues = form.getFieldsValue()
+  return (
+    showing && (
+      <div className={className + ' mb3'}>
+        <h1>Checkout</h1>
+        {fields.map(field => {
+          const formatter = field.formatter || (value => value)
+          return (
+            <Row gutter={16} className="mb3" key={field.key}>
+              <Col span={8} className="tr b">
+                {field.label}:
+              </Col>
+              <Col span={16}>{formatter(formValues[field.key])}</Col>
+            </Row>
+          )
+        })}
+        {formValues.subscribe && (
+          <Row gutter={16} className="mb3">
+            <Col span={8} className="tr b">
+              Subcribe:
+            </Col>
+            <Col span={16}>
+              bill on the <strong>{moment.default().format('Do')}</strong> of each month
+            </Col>
+          </Row>
+        )}
+        <Row className="mt4">
+          <Col offset={8} span={16}>
+            <Button size="large" type="primary">
+              Pay
+            </Button>
+            <Button size="large" onClick={() => state.setState({ page: 0 })} className="ml3">
+              Go back
+            </Button>
+          </Col>
+        </Row>
+      </div>
+    )
+  )
+}
 
 Page2.propTypes = {
   state: PropTypes.object,
-  className: PropTypes.string
+  form: PropTypes.object,
+  className: PropTypes.string,
+  showing: PropTypes.bool
 }
