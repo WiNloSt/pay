@@ -82,7 +82,8 @@ const Page1 = ({ context, form, state, className }) => {
   const allFormFieldsFilled =
     R.compose(
       R.all(hasValue),
-      values => Object.keys(values).map(key => values[key])
+      values => Object.keys(values).map(key => values[key]),
+      R.drop(['uid'])
     )(form.getFieldsValue()) && R.complement(R.isEmpty)(form.getFieldsValue())
 
   const formHasAnyError = R.compose(
