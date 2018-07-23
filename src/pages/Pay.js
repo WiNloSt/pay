@@ -6,7 +6,6 @@ import { Link } from 'react-static'
 import * as R from 'ramda'
 import { adopt } from 'react-adopt'
 import { State } from 'react-powerplug'
-import { Elements } from 'react-stripe-elements'
 
 import { StoreConsumer } from '../components/Store'
 import { Card } from '../components/Card'
